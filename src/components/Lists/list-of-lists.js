@@ -5,19 +5,11 @@ export default class ListOfLists extends Component {
         super(props);
         this.props = props;
 
-        this.handleDeleteTask = this.handleDeleteTask.bind(this);
     }
 
-    handleDeleteTask(name) {
 
-        const filteredTasks = this.props.lists.filter(list => list.name !== name);
+    handleDelete() {
 
-        this.setState({
-            lists: filteredTasks,
-
-        })
-
-        console.log(filteredTasks);
     }
 
     render() {
@@ -31,7 +23,7 @@ export default class ListOfLists extends Component {
                         {list.name}
                     </a>
 
-                    <button type="submit" className="delete-btn" onClick={this.handleDeleteTask}>Delete</button>
+                    <button type="submit" className="delete-btn" onClick={this.handleDelete}>Delete</button>
                 </li>
             ))}
             </ol>
