@@ -2,11 +2,18 @@ import React, { Component } from 'react';
 import AddListForm from './add-list-form';
 import ListOfLists from "./list-of-lists.js";
 import { connect } from "react-redux";
-import { addList } from "../../store/lists/actions.js";
+import { addList, deleteList } from "../../store/lists/actions.js";
+import { getLists } from "../../store/lists/actions.js"
+import Loader from '../common/Loader.js';
 
 class Lists extends Component {
+    componentDidMount() {
+        const { getLists } = this.props;
+        getLists();
+    }
+
     render() {
-        const { lists, addList } = this.props;
+        const { lists, addList, deleteList, status } = this.props;
         return (
             <>
                 <div className="add-form">
@@ -15,8 +22,10 @@ class Lists extends Component {
                 </div>
 
                 <div className="lists">
-                    <ListOfLists lists={lists} />
+                    <ListOfLists lists={lists} onDelete={deleteList} />
                 </div>
+                {status === "loading" && <Loader />}
+
             </>
         )
     }
@@ -25,13 +34,16 @@ class Lists extends Component {
 
 function mapStateToProps(state) {
     return {
-        lists: state.lists.lists
+        lists: state.lists.lists,
+        status: state.lists.status,
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
         addList: (list) => dispatch(addList(list)),
+        deleteList: (id) => dispatch(deleteList(id)),
+        getLists: () => dispatch(getLists()),
     }
 }
 

@@ -7,14 +7,9 @@ export default class ListOfLists extends Component {
 
     }
 
-
-    handleDelete() {
-
-    }
-
     render() {
 
-        const { lists } = this.props;
+        const { lists, onDelete } = this.props;
 
         return (
             <ol>{lists.map((list) => (
@@ -23,7 +18,7 @@ export default class ListOfLists extends Component {
                         {list.name}
                     </a>
 
-                    <button type="submit" className="delete-btn" onClick={this.handleDelete}>Delete</button>
+                    <button type="submit" className="delete-btn" onClick={() => onDelete(list.id)}>Delete</button>
                 </li>
             ))}
             </ol>
