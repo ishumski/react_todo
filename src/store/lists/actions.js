@@ -8,24 +8,17 @@ export const addList = createAsyncThunk(types.ADD_LIST, async (list) => {
     return response;
 });
 
-export const deleteList = (id) => ({
-    type: types.DELETE_LIST,
-    payload: id,
-});
+export const deleteList = createAsyncThunk(types.DELETE_LIST, async (id) => {
+    const response = await apiService.delete("lists", id);
 
-// export const getListsRequest = () => ({
-//     type: types.GET_LISTS_REQUEST,
-// });
+    return response;
+})
 
 
-// export const getListsSuccess = (lists) => ({
-//     type: types.GET_LISTS_SUCCESS,
-//     payload: lists,
-// });
 
-// export const getListsFailure = (error) => ({
-//     type: types.GET_LISTS_FAILURE,
-//     payload: error,
+// (id) => ({
+//     type: types.DELETE_LIST,
+//     payload: id,
 // });
 
 

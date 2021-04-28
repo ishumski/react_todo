@@ -34,6 +34,28 @@ class ApiService {
 
         return await json;
     }
+    async delete(url, id) {
+        const response = await fetch(`${this.baseUrl}/${url}`, {
+            method: "DELETE",
+            body: JSON.stringify(id),
+            headers: {
+                "Content-Type": "application/json"
+            }
+
+        });
+
+        if (!response.ok) {
+            throw Error(response.status);
+        }
+
+        const json = await response.json();
+
+        return await json;
+    }
+
+
+
+
 }
 const apiService = new ApiService("http://localhost:3001");
 
