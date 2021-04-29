@@ -1,15 +1,11 @@
 export function generateId(tasks) {
+  const ids = tasks.map((task) => task.id);
 
-    const ids = tasks.map(task => {
-        return task.id;
-    });
+  if (!ids.length) {
+    return 1;
+  }
 
-    if (!ids.length) {
-        return 1;
-    }
+  const maxId = Math.max(...ids);
 
-    const maxId = Math.max(...ids);
-
-    return maxId + 1;
-};
-
+  return maxId + 1;
+}

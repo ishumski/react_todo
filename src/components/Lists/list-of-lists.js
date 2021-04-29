@@ -1,27 +1,26 @@
-import React, { Component } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
-export default class ListOfLists extends Component {
-    constructor(props) {
-        super(props);
-        this.props = props;
+const ListOfLists = ({ lists, onDelete }) => (
+  <ol>
+    {lists.map((list) => (
+      <li key={list.id}>
+        <a href="/">
+          {list.name}
+        </a>
 
-    }
+        <button type="submit" className="delete-btn" onClick={() => onDelete(list.id)}>Delete</button>
+      </li>
+    ))}
+  </ol>
+);
 
-    render() {
+ListOfLists.propTypes = {
+  lists: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+  })).isRequired,
+  onDelete: PropTypes.func.isRequired,
+};
 
-        const { lists, onDelete } = this.props;
-
-        return (
-            <ol>{lists.map((list) => (
-                <li key={list.id}>
-                    <a href="#">
-                        {list.name}
-                    </a>
-
-                    <button type="submit" className="delete-btn" onClick={() => onDelete(list.id)}>Delete</button>
-                </li>
-            ))}
-            </ol>
-        )
-    }
-}
+export default ListOfLists;

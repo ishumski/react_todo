@@ -1,21 +1,9 @@
-import * as types from "./types";
-import { createAsyncThunk } from "@reduxjs/toolkit";
-import apiService from "../../services/api-service";
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import * as types from './types';
+import apiService from '../../services/api-service';
 
-export const addList = createAsyncThunk(types.ADD_LIST, async (list) => {
-    const response = await apiService.post("lists", list);
+export const addList = createAsyncThunk(types.ADD_LIST, async (list) => apiService.post('lists', list));
 
-    return response;
-});
+export const deleteList = createAsyncThunk(types.DELETE_LIST, async (id) => apiService.delete(`lists/${id}`));
 
-export const deleteList = createAsyncThunk(types.DELETE_LIST, async (id) => {
-    const response = await apiService.delete("lists", id);
-
-    return response;
-})
-
-export const getLists = createAsyncThunk(types.GET_LISTS, async () => {
-    const response = await apiService.get("lists");
-
-    return response;
-});
+export const getLists = createAsyncThunk(types.GET_LISTS, async () => apiService.get('lists'));
