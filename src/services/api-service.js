@@ -34,10 +34,10 @@ class ApiService {
 
         return await json;
     }
-    async delete(url, id) {
+    async delete(url, body) {
         const response = await fetch(`${this.baseUrl}/${url}`, {
             method: "DELETE",
-            body: JSON.stringify(id),
+            body: JSON.stringify(body),
             headers: {
                 "Content-Type": "application/json"
             }
@@ -52,9 +52,6 @@ class ApiService {
 
         return await json;
     }
-
-
-
 
 }
 const apiService = new ApiService("http://localhost:3001");

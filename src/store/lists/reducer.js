@@ -13,7 +13,7 @@ export default function lists(state = initialState, action) {
             return { ...state, lists: [...state.lists, action.payload,], status: "succeed" }
         }
         case types.DELETE_LIST: {
-            return { ...state, lists: state.lists.filter((list) => list.id !== action.id) }
+            return { ...state, lists: state.lists.filter((list) => list.id !== action.id), status: "succeed" }
         }
 
         case types.ADD_LIST_REQUEST: {
@@ -23,6 +23,20 @@ export default function lists(state = initialState, action) {
             }
         }
 
+        case types.DELETE_LIST_REQUEST: {
+            return {
+                ...state,
+                status: "loading"
+            }
+        }
+
+        case types.DELETE_LIST_FAILURE: {
+            return {
+                ...state,
+                status: "error"
+            }
+        }
+        
         case types.GET_LISTS_REQUEST: {
             return {
                 ...state,

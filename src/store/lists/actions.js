@@ -14,14 +14,6 @@ export const deleteList = createAsyncThunk(types.DELETE_LIST, async (id) => {
     return response;
 })
 
-
-
-// (id) => ({
-//     type: types.DELETE_LIST,
-//     payload: id,
-// });
-
-
 export const getLists = createAsyncThunk(types.GET_LISTS, async () => {
     const response = await apiService.get("lists");
 
