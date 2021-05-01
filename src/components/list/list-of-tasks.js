@@ -1,24 +1,28 @@
-import React from 'react'
+import React from 'react';
+import PropTypes from 'prop-types';
 
-function ListOfTasks({ tasks }) {
+export default function ListOfTasks({ tasks }) {
   return (
-    <ol>{tasks.map((task) => {
-      <li key={task.id}>
-        <input type="checkbox" />
+    <ol>
+      {tasks.map((task) => (
+        <li key={task.id}>
+          <input type="checkbox" />
 
-        <span>{task.text}</span>
+          <span>{task.text}</span>
 
-        <button className="edit-btn">
-          <i className="fas fa-edit"></i>
-        </button>
+          <button type="submit" className="edit-btn">
+            edit
+          </button>
 
-        <button className="delete-btn">
-          <i className="fas fa-trash-alt"></i>
-        </button>
-      </li>
-    })}
+          <button type="submit" className="delete-btn">
+            delete
+          </button>
+        </li>
+      ))}
     </ol>
-  )
+  );
 }
 
-export default ListOfTasks;
+ListOfTasks.propTypes = {
+  tasks: PropTypes.string.isRequired,
+};

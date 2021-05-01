@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import PropTypes from 'prop-types';
 
 export default class AddEntityForm extends Component {
   constructor() {
@@ -11,15 +12,21 @@ export default class AddEntityForm extends Component {
     });
   }
 
-  handleSubmit = (value, action) => {
+  handleSubmit = (values, action) => {
     const { onSubmit } = this.props;
-    onSubmit(value);
+
+    onSubmit(values);
+
     action.resetForm();
   }
 
   render() {
     return (
-      <Formik initialValues={{ name: '' }} onSubmit={this.handleSubmit} validationSchema={this.validationSchema}>
+      <Formik
+        initialValues={{ name: '' }}
+        onSubmit={this.handleSubmit}
+        validationSchema={this.validationSchema}
+      >
         {({ handleSubmit, handleChange, values }) => (
           <form onSubmit={handleSubmit}>
             <input

@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import AddEntityForm from '../common/add-entity-form';
-import ListOfLists from './list-of-lists';
-import { addList, deleteList, getLists } from '../../store/lists/actions';
 
 import Loader from '../common/Loader';
+import ListOfLists from './list-of-lists';
+import AddEntityForm from '../common/add-entity-form';
+
 import ActionStatus from '../../constance/action-status';
+
+import { addList, deleteList, getLists } from '../../store/lists/actions';
 
 class Lists extends Component {
   componentDidMount() {
@@ -18,16 +20,17 @@ class Lists extends Component {
     const {
       lists, addList, deleteList, status,
     } = this.props;
+
     return (
       <>
         <div className="add-form">
           <AddEntityForm onSubmit={addList} />
-
         </div>
 
         <div className="lists">
           <ListOfLists lists={lists} onDelete={deleteList} />
         </div>
+
         {status === ActionStatus.LOADING && <Loader />}
 
       </>
@@ -36,19 +39,21 @@ class Lists extends Component {
 }
 
 Lists.propTypes = {
-  lists: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-
-  })).isRequired,
+  lists: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
   addList: PropTypes.func.isRequired,
   getLists: PropTypes.func.isRequired,
   deleteList: PropTypes.func.isRequired,
   status: PropTypes.oneOf([
     ActionStatus.IDLE,
-    ActionStatus.LOADING,
     ActionStatus.SUCCEEDED,
-    ActionStatus.FAILED]).isRequired,
+    ActionStatus.LOADING,
+    ActionStatus.FAILED,
+  ]).isRequired,
 };
 
 function mapStateToProps(state) {

@@ -7,7 +7,9 @@ class ApiService {
   }
 
   async get(url) {
-    const response = await fetch(`${this.baseUrl}/${url}`, { method: HttpMethod.GET });
+    const response = await fetch(`${this.baseUrl}/${url}`, {
+      method: HttpMethod.GET,
+    });
 
     if (!response.ok) {
       throw Error(response.status);
@@ -23,7 +25,6 @@ class ApiService {
       headers: {
         'Content-Type': ContentType.APPLICATION_JSON,
       },
-
     });
 
     if (!response.ok) {
@@ -34,7 +35,9 @@ class ApiService {
   }
 
   async delete(url) {
-    const response = await fetch(`${this.baseUrl}/${url}`, { method: HttpMethod.DELETE });
+    const response = await fetch(`${this.baseUrl}/${url}`, {
+      method: HttpMethod.DELETE,
+    });
 
     if (!response.ok) {
       throw Error(response.status);

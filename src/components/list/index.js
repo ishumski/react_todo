@@ -1,24 +1,29 @@
-import React, { Component } from 'react'
-import AddEntityForm from '../common/add-entity-form'
-import ListOfTasks from './list-of-tasks'
+import React from 'react';
+import { Button } from '@material-ui/core';
+import ListOfTasks from './list-of-tasks';
+import AddEntityForm from '../common/add-entity-form';
 
-export default class List extends Component {
-  render() {
-    return (
-      <>
-        <div className="add-form">
-          <AddEntityForm />
-        </div>
+function List() {
+  return (
+    <>
+      <div className="add-form">
+        <AddEntityForm />
+      </div>
 
-        <div className="todo-list">
-          <ListOfTasks tasks={[]} />
-        </div>
+      <div className="todo-list">
+        <ListOfTasks tasks={[]} />
+      </div>
 
-        <div className="delete-checked-wrapper">
-
-          <Button className="delete-checked-btn">Delete Checked</Button>
-        </div>
-      </>
-    )
-  }
+      <div className="delete-checked-wrapper">
+        <Button
+          type="submit"
+          className="delete-checked-btn"
+        >
+          Delete Checked
+        </Button>
+      </div>
+    </>
+  );
 }
+
+export default List;

@@ -4,34 +4,34 @@ import ActionStatus from '../../constance/action-status';
 const initialState = {
   lists: [],
   status: ActionStatus.IDLE,
-
 };
 
 export default function lists(state = initialState, action) {
   switch (action.type) {
     case types.ADD_LIST_SUCCESS: {
-      return { ...state, lists: [...state.lists, action.payload], status: 'succeed' };
+      return {
+        ...state,
+        lists: [...state.lists, action.payload],
+        status: ActionStatus.SUCCEEDED,
+      };
     }
     case types.DELETE_LIST_SUCCESS: {
-      return { ...state, lists: state.lists.filter((list) => list.id !== action.id), status: 'succeed' };
+      return {
+        ...state,
+        lists: state.lists.filter(
+          (list) => list.id !== action.payload,
+        ),
+        status: ActionStatus.SUCCEEDED,
+      };
     }
-
-    case types.GET_LISTS_REQUEST:
+    case types.ADD_LIST_REQUEST:
     case types.DELETE_LIST_REQUEST:
-    case types.ADD_LIST_REQUEST: {
+    case types.GET_LISTS_REQUEST: {
       return {
         ...state,
         status: ActionStatus.LOADING,
       };
     }
-
-    case types.DELETE_LIST_FAILURE: {
-      return {
-        ...state,
-        status: ActionStatus.FAILED,
-      };
-    }
-
     case types.GET_LISTS_SUCCESS: {
       return {
         ...state,
