@@ -45,6 +45,7 @@
         "no-underscore-dangle": "off",
         "no-shadow": "off",
         "import/newline-after-import": "warn",
-        "jsx-a11y/anchor-is-valid": "off"
+        "jsx-a11y/anchor-is-valid": "off",
+        "react/no-unused-prop-types": "warn"
     }
 }

@@ -9,6 +9,7 @@ import AddEntityForm from '../common/add-entity-form';
 import ActionStatus from '../../constance/action-status';
 
 import { addList, deleteList, getLists } from '../../store/lists/actions';
+import EntityType from '../../constance/entity-type';
 
 class Lists extends Component {
   componentDidMount() {
@@ -24,7 +25,7 @@ class Lists extends Component {
     return (
       <>
         <div className="add-form">
-          <AddEntityForm onSubmit={addList} />
+          <AddEntityForm onSubmit={addList} type={EntityType.LIST} />
         </div>
 
         <div className="lists">

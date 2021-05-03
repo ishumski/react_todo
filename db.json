@@ -1,7 +1,18 @@
 {
   "lists": [
     {
-      "name": "The Haunt of Hightower",
+      "name": "Oketra the True",
+      "id": 1
+    }
+  ],
+  "tasks": [
+    {
+      "listId": "[object Object]",
+      "id": 1
+    },
+    {
+      "name": "123",
+      "listId": "1",
       "id": 2
     }
   ]
