@@ -8,3 +8,5 @@ export const getListTasks = createAsyncThunk(types.GET_LIST_TASKS, (listId) => a
 export const addListTask = createAsyncThunk(types.ADD_LIST_TASKS, ({ newTask, listId }) => apiService.post(`list/${listId}/tasks`, newTask));
 
 export const updateListTask = createAsyncThunk(types.UPDATE_LIST_TASK, (task) => apiService.put(`list/${task.listId}/tasks/${task.id}`, task));
+
+export const deleteListTask = createAsyncThunk(types.DETETE_LIST_TASK, (task) => apiService.delete(`list/${task.listId}/tasks/${task.id}`, task));

@@ -26,40 +26,50 @@ export default class ListOfTasks extends Component {
     onEdit({ ...task, name: value });
   }
 
-  render() {
-    const { tasks } = this.props;
-    const { editTaskId } = this.state;
+   handleDelete = () => {
+     console.log('delete');
+   }
 
-    return (
-      <ol>
-        {tasks.map((task) => (
-          <li key={task.id}>
-            <input type="checkbox" />
+   render() {
+     const { tasks } = this.props;
+     const { editTaskId } = this.state;
 
-            {editTaskId === task.id ? (
-              <EditEntityInput value={task.name} onEdit={this.handleEdit} />
-            ) : (
-              <span>{task.name}</span>
-            )}
+     return (
+       <ol>
+         {tasks.map((task) => (
+           <li key={task.id}>
+             <input type="checkbox" />
 
-            <button type="submit" className="edit-btn" onClick={() => this.setEditTaskId(task.id)}>
-              edit
-            </button>
+             {editTaskId === task.id ? (
+               <EditEntityInput value={task.name} onEdit={this.handleEdit} />
+             ) : (
+               <span>{task.name}</span>
+             )}
 
-            <button type="submit" className="delete-btn">
-              delete
-            </button>
-          </li>
-        ))}
-      </ol>
-    );
-  }
+             <button
+               type="submit"
+               className="edit-btn"
+               onClick={() => this.setEditTaskId(task.id)}
+             >
+               edit
+             </button>
+
+             <button
+               type="submit"
+               className="delete-btn"
+               onClick={this.handleDelete}
+             >
+               delete
+             </button>
+           </li>
+         ))}
+       </ol>
+     );
+   }
 }
 
 ListOfTasks.propTypes = {
   tasks: PropTypes.string.isRequired,
   onEdit: PropTypes.func.isRequired,
-  editTaskId: PropTypes.func.isRequired,
-  value: PropTypes.string.isRequired,
 
 };

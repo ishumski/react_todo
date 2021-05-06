@@ -12,3 +12,8 @@ export const UPDATE_LIST_TASK = 'UPDATE_LIST_TASK';
 export const UPDATE_LIST_TASK_REQUEST = 'UPDATE_LIST_TASK/pending';
 export const UPDATE_LIST_TASK_SUCCEES = 'UPDATE_LIST_TASK/fulfilled';
 export const UPDATE_LIST_TASK_FAILURE = 'UPDATE_LIST_TASK/rejected';
+
+export const DETETE_LIST_TASK = 'DETETE_LIST_TASK';
+export const DELETE_LIST_TASK_REQUEST = 'DELETE_LIST_TASK/pending';
+export const DELETE_LIST_TASK_SUCCEES = 'DELETE_LIST_TASK/fulfilled';
+export const DELETE_LIST_TASK_FAILURE = 'DELETE_LIST_TASK/rejected';

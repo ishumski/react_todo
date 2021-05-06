@@ -25,6 +25,16 @@ export default function task(state = initialState, action) {
       };
     }
 
+    case types.DELETE_LIST_TASK_SUCCEES: {
+      return {
+        ...state,
+        tasks: state.tasks.filter(
+          (t) => t.id !== action.payload,
+        ),
+        status: ActionStatus.SUCCEEDED,
+      };
+    }
+
     case types.GET_LIST_TASKS_SUCCEES: {
       return {
         ...state,
