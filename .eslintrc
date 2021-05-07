@@ -46,6 +46,10 @@
         "no-shadow": "off",
         "import/newline-after-import": "warn",
         "jsx-a11y/anchor-is-valid": "off",
-        "react/no-unused-prop-types": "warn"
+        "react/no-unused-prop-types": "warn",
+        "react/prop-types": "warn",
+        "no-duplicate-case": "warn",
+        "semi":"warn",
+        "object-curly-newline":"warn"
     }
 }

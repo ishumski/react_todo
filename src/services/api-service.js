@@ -50,6 +50,9 @@ class ApiService {
     const response = await fetch(`${this.baseUrl}/${url}`, {
       method: HttpMethod.PUT,
       body: JSON.stringify(body),
+      headers: {
+        'Content-Type': ContentType.APPLICATION_JSON,
+      },
     });
     if (!response.ok) {
       throw Error(response.status);

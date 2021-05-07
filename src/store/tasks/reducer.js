@@ -10,10 +10,28 @@ const initialState = {
 export default function task(state = initialState, action) {
   switch (action.type) {
     case types.GET_LIST_TASKS_REQUEST:
-    case types.ADD_LIST_TASKS_REQUEST: {
+    case types.ADD_LIST_TASKS_REQUEST:
+    case types.UPDATE_LIST_TASK_REQUEST:
+    case types.DELETE_LIST_TASK_REQUEST: {
       return {
         ...state,
         status: ActionStatus.LOADING,
+      };
+    }
+
+    case types.DELETE_CHECKED_LIST_TASK_SUCCEES: {
+      return {
+        ...state,
+        status: ActionStatus.SUCCEEDED,
+        tasks: state.tasks.filter((task) => !action.payload.includes(task.id)),
+      };
+    }
+
+    case types.DELETE_LIST_TASK_SUCCEES: {
+      return {
+        ...state,
+        status: ActionStatus.SUCCEEDED,
+        tasks: state.tasks.filter((task) => task.id !== action.payload),
       };
     }
 
@@ -25,13 +43,17 @@ export default function task(state = initialState, action) {
       };
     }
 
-    case types.DELETE_LIST_TASK_SUCCEES: {
+    case types.UPDATE_LIST_TASK_SUCCEES: {
+      const updatedTask = action.payload;
       return {
         ...state,
-        tasks: state.tasks.filter(
-          (t) => t.id !== action.payload,
-        ),
         status: ActionStatus.SUCCEEDED,
+        tasks: state.tasks.map((task) => {
+          if (task.id === updatedTask.id) {
+            return updatedTask;
+          }
+          return task;
+        }),
       };
     }
 

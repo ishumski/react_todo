@@ -9,6 +9,8 @@ export default class ListOfTasks extends Component {
     this.state = {
       editTaskId: null,
     };
+
+    this.EditEntityInput = React.createRef();
   }
 
   setEditTaskId = (editTaskId) => {
@@ -24,52 +26,75 @@ export default class ListOfTasks extends Component {
     const task = tasks.find((t) => t.id === editTaskId);
 
     onEdit({ ...task, name: value });
+
+    this.setEditTaskId(null);
   }
 
-   handleDelete = () => {
-     console.log('delete');
-   }
+  handleEditButtonClick = (taskId) => {
+    const { editTaskId } = this.state;
+    if (editTaskId) {
+      this.EditEntityInput.current.handleEdit();
+      return;
+    }
+    this.setEditTaskId(taskId);
+  }
 
-   render() {
-     const { tasks } = this.props;
-     const { editTaskId } = this.state;
+  handleTaskCheck = (taskId) => {
+    const { onEdit, tasks } = this.props;
 
-     return (
-       <ol>
-         {tasks.map((task) => (
-           <li key={task.id}>
-             <input type="checkbox" />
+    const task = tasks.find((t) => t.id === taskId);
 
-             {editTaskId === task.id ? (
-               <EditEntityInput value={task.name} onEdit={this.handleEdit} />
-             ) : (
-               <span>{task.name}</span>
-             )}
+    onEdit({ ...task, checked: !task.checked });
+  }
 
-             <button
-               type="submit"
-               className="edit-btn"
-               onClick={() => this.setEditTaskId(task.id)}
-             >
-               edit
-             </button>
+  render() {
+    const { tasks, onDelete } = this.props;
+    const { editTaskId } = this.state;
 
-             <button
-               type="submit"
-               className="delete-btn"
-               onClick={this.handleDelete}
-             >
-               delete
-             </button>
-           </li>
-         ))}
-       </ol>
-     );
-   }
+    return (
+      <ol>
+        {tasks.map((task) => (
+          <li key={task.id}>
+            <input
+              type="checkbox"
+              defaultChecked={task.checked}
+              onChange={() => this.handleTaskCheck(task.id)}
+            />
+
+            {editTaskId === task.id ? (
+              <EditEntityInput
+                value={task.name}
+                onEdit={this.handleEdit}
+                ref={this.EditEntityInput}
+              />
+            ) : (
+              <span>{task.name}</span>
+            )}
+
+            <button
+              type="submit"
+              className="edit-btn"
+              onClick={() => this.handleEditButtonClick(task.id)}
+            >
+              edit
+            </button>
+
+            <button
+              type="submit"
+              className="delete-btn"
+              onClick={() => onDelete(task.id)}
+            >
+              delete
+            </button>
+          </li>
+        ))}
+      </ol>
+    );
+  }
 }
 
 ListOfTasks.propTypes = {
   tasks: PropTypes.string.isRequired,
   onEdit: PropTypes.func.isRequired,
-
+  onDelete: PropTypes.func.isRequired,
 };

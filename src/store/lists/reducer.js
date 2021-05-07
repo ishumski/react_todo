@@ -32,6 +32,7 @@ export default function lists(state = initialState, action) {
         status: ActionStatus.LOADING,
       };
     }
+
     case types.GET_LISTS_SUCCESS: {
       return {
         ...state,
