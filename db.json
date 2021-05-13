@@ -1,34 +1,10 @@
 {
   "lists": [
     {
-      "name": "Oketra the True",
-      "id": 2
+      "name": "drink",
+      "userId": "google-oauth2|105947010324722896448",
+      "id": 3
     }
   ],
-  "tasks": [
-    {
-      "name": "12345",
-      "listId": "2",
-      "id": 1,
-      "checked": true
-    },
-    {
-      "name": "Oketra the True",
-      "checked": false,
-      "listId": "2",
-      "id": 2
-    },
-    {
-      "name": "456",
-      "checked": true,
-      "listId": "2",
-      "id": 3
-    },
-    {
-      "name": "17",
-      "checked": true,
-      "listId": "2",
-      "id": 4
-    }
-  ]
+  "tasks": []
 }

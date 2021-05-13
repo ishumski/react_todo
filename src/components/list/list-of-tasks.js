@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import PropTypes from 'prop-types';
 import EditEntityInput from '../common/edit-entity-input';
 
@@ -52,43 +53,64 @@ export default class ListOfTasks extends Component {
     const { editTaskId } = this.state;
 
     return (
-      <ol>
-        {tasks.map((task) => (
-          <li key={task.id}>
-            <input
-              type="checkbox"
-              defaultChecked={task.checked}
-              onChange={() => this.handleTaskCheck(task.id)}
-            />
-
-            {editTaskId === task.id ? (
-              <EditEntityInput
-                value={task.name}
-                onEdit={this.handleEdit}
-                ref={this.EditEntityInput}
-              />
-            ) : (
-              <span>{task.name}</span>
-            )}
-
-            <button
-              type="submit"
-              className="edit-btn"
-              onClick={() => this.handleEditButtonClick(task.id)}
+      <DragDropContext>
+        <Droppable droppableId="droppable">
+          {(provided) => (
+            <ol
+              ref={provided.innerRef}
+              {...provided.droppableProps}
             >
-              edit
-            </button>
+              {tasks.map((task, index) => (
+                <Draggable
+                  key={task.id}
+                  draggableId={`${task.id}`}
+                  index={index}
+                >
+                  {(provided) => (
+                    <li
+                      ref={provided.innerRef}
+                      {...provided.draggableProps}
+                      {...provided.dragHandleProps}
+                    >
+                      <input
+                        type="checkbox"
+                        defaultChecked={task.checked}
+                        onChange={() => this.handleTaskCheck(task.id)}
+                      />
 
-            <button
-              type="submit"
-              className="delete-btn"
-              onClick={() => onDelete(task.id)}
-            >
-              delete
-            </button>
-          </li>
-        ))}
-      </ol>
+                      {editTaskId === task.id ? (
+                        <EditEntityInput
+                          value={task.name}
+                          onEdit={this.handleEdit}
+                          ref={this.EditEntityInput}
+                        />
+                      ) : (
+                        <span>{task.name}</span>
+                      )}
+
+                      <button
+                        type="submit"
+                        className="edit-btn"
+                        onClick={() => this.handleEditButtonClick(task.id)}
+                      >
+                        edit
+                      </button>
+
+                      <button
+                        type="submit"
+                        className="delete-btn"
+                        onClick={() => onDelete(task.id)}
+                      >
+                        delete
+                      </button>
+                    </li>
+                  )}
+                </Draggable>
+              ))}
+            </ol>
+          )}
+        </Droppable>
+      </DragDropContext>
     );
   }
 }

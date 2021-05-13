@@ -50,6 +50,7 @@
         "react/prop-types": "warn",
         "no-duplicate-case": "warn",
         "semi":"warn",
-        "object-curly-newline":"warn"
+        "object-curly-newline":"warn",
+        "react/jsx-props-no-spreading":"warn"
     }
 }

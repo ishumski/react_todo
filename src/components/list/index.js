@@ -20,7 +20,8 @@ class List extends Component {
 
   handleAddListTask = (newTask) => {
     const { addListTask } = this.props;
-    addListTask({ ...newTask, checked: false });
+    const order = getLastOrder(tasks);
+    addListTask({ ...newTask, checked: false, order });
   }
 
   render() {
@@ -32,6 +33,8 @@ class List extends Component {
       deleteCheckedListTask,
     } = this.props;
 
+    const sortedTasks = [...tasks].sort((a, b) => (a - b));
+
     return (
 
       <>
@@ -41,7 +44,7 @@ class List extends Component {
 
         <div className="todo-list">
           <ListOfTasks
-            tasks={tasks}
+            tasks={sortedTasks}
             onEdit={updateListTask}
             onDelete={deleteListTask}
           />
