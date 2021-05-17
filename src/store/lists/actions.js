@@ -11,4 +11,4 @@ export const deleteList = createAsyncThunk(types.DELETE_LIST, async (id) => {
   return id;
 });
 
-export const getLists = createAsyncThunk(types.GET_LISTS, (userId) => apiService.get(`lists?userId${userId}`));
+export const getLists = createAsyncThunk(types.GET_LISTS, () => apiService.get('lists'));

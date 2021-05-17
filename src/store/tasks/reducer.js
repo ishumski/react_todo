@@ -65,6 +65,30 @@ export default function task(state = initialState, action) {
       };
     }
 
+    case types.REORDER_LIST_TASKS_SUCCEES: {
+      const { from, to } = action.payload;
+      console.log(from, to);
+      const delta = from < to ? -1 : 1;
+      return {
+        ...state,
+        status: ActionStatus.SUCCEEDED,
+        tasks: state.tasks.map((task) => {
+          if (task.order === from) {
+            return { ...task, order: to };
+          }
+
+          if (delta) {
+
+          }
+          
+          if (task.order > from && task.order <= to) {
+            return { ...task, order: task.order + delta };
+          }
+          return task;
+        }),
+      };
+    }
+
     default: {
       return state;
     }

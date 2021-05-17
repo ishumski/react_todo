@@ -49,9 +49,11 @@ export default class ListOfTasks extends Component {
   }
 
   handleTaskOrderChange = (result) => {
+    const { onReorder } = this.props;
     if (!result.destination) {
       return;
     }
+    onReorder({ from: result.source.index + 1, to: result.destination.index + 1 });
   }
 
   render() {
@@ -59,7 +61,7 @@ export default class ListOfTasks extends Component {
     const { editTaskId } = this.state;
 
     return (
-      <DragDropContext>
+      <DragDropContext onDragEnd={this.handleTaskOrderChange}>
         <Droppable droppableId="droppable">
           {(provided) => (
             <ol
@@ -122,7 +124,7 @@ export default class ListOfTasks extends Component {
 }
 
 ListOfTasks.propTypes = {
-  tasks: PropTypes.string.isRequired,
+  // tasks: PropTypes.string.isRequired,
   onEdit: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired,
 };

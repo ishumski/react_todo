@@ -6,7 +6,12 @@ import ListOfTasks from './list-of-tasks';
 import AddEntityForm from '../common/add-entity-form';
 import EntityType from '../../constance/entity-type';
 import {
-  getListTasks, addListTask, updateListTask, deleteListTask, deleteCheckedListTask,
+  getListTasks,
+  addListTask,
+  updateListTask,
+  deleteListTask,
+  deleteCheckedListTask,
+  reorderListTasks,
 } from '../../store/tasks/action';
 import ActionStatus from '../../constance/action-status';
 import Loader from '../common/Loader';
@@ -32,9 +37,10 @@ class List extends Component {
       status,
       deleteListTask,
       deleteCheckedListTask,
+      reorderListTasks,
     } = this.props;
 
-    const sortedTasks = [...tasks].sort((a, b) => (a - b));
+    const sortedTasks = [...tasks].sort((a, b) => (a.order - b.order));
 
     return (
 
@@ -48,6 +54,7 @@ class List extends Component {
             tasks={sortedTasks}
             onEdit={updateListTask}
             onDelete={deleteListTask}
+            onReorder={reorderListTasks}
           />
         </div>
 
@@ -83,6 +90,7 @@ function mapDispatchToProps(dispatch, ownProps) {
     updateListTask: (task) => dispatch(updateListTask(task)),
     deleteListTask: (taskId) => dispatch(deleteListTask({ taskId, listId: params.id })),
     deleteCheckedListTask: () => dispatch(deleteCheckedListTask(params.id)),
+    reorderListTasks: ({ from, to }) => dispatch(reorderListTasks({ listId: params.id, from, to })),
 
   };
 }
@@ -92,8 +100,8 @@ List.propTypes = {
   getListTasks: PropTypes.func.isRequired,
   addListTask: PropTypes.func.isRequired,
   updateListTask: PropTypes.func.isRequired,
-  tasks: PropTypes.string.isRequired,
   deleteListTask: PropTypes.func.isRequired,
   deleteCheckedListTask: PropTypes.func.isRequired,
-  // status: PropTypes.string.isRequired,
+  reorderListTasks: PropTypes.func.isRequired,
+
 };

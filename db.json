@@ -1,4 +1,49 @@
 {
-  "lists": [],
-  "tasks": []
+  "lists": [
+    {
+      "name": "lol",
+      "userId": "google-oauth2|105947010324722896448",
+      "id": 1
+    },
+    {
+      "name": "d",
+      "userId": "google-oauth2|105947010324722896448",
+      "id": 2
+    },
+    {
+      "name": "dssss",
+      "userId": "google-oauth2|105947010324722896448",
+      "id": 3
+    }
+  ],
+  "tasks": [
+    {
+      "name": "a",
+      "checked": false,
+      "order": 1,
+      "listId": "1",
+      "id": 1
+    },
+    {
+      "name": "b",
+      "checked": false,
+      "order": 2,
+      "listId": "1",
+      "id": 2
+    },
+    {
+      "name": "c",
+      "checked": false,
+      "order": 3,
+      "listId": "1",
+      "id": 3
+    },
+    {
+      "name": "d",
+      "checked": false,
+      "order": 4,
+      "listId": "1",
+      "id": 4
+    }
+  ]
 }
