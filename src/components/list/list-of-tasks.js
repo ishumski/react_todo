@@ -48,6 +48,12 @@ export default class ListOfTasks extends Component {
     onEdit({ ...task, checked: !task.checked });
   }
 
+  handleTaskOrderChange = (result) => {
+    if (!result.destination) {
+      return;
+    }
+  }
+
   render() {
     const { tasks, onDelete } = this.props;
     const { editTaskId } = this.state;

@@ -51,6 +51,7 @@
         "no-duplicate-case": "warn",
         "semi":"warn",
         "object-curly-newline":"warn",
-        "react/jsx-props-no-spreading":"warn"
+        "react/jsx-props-no-spreading":"warn",
+        "no-useless-return":"warn"
     }
 }

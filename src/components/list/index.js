@@ -10,6 +10,7 @@ import {
 } from '../../store/tasks/action';
 import ActionStatus from '../../constance/action-status';
 import Loader from '../common/Loader';
+import { getLastOrder } from '../../utils/index';
 
 class List extends Component {
   componentDidMount() {
@@ -19,7 +20,7 @@ class List extends Component {
   }
 
   handleAddListTask = (newTask) => {
-    const { addListTask } = this.props;
+    const { addListTask, tasks } = this.props;
     const order = getLastOrder(tasks);
     addListTask({ ...newTask, checked: false, order });
   }
