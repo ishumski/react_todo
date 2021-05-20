@@ -54,6 +54,7 @@
         "react/jsx-props-no-spreading": "warn",
         "no-useless-return": "warn",
         "comma-dangle": "warn",
-        "no-empty": "warn"
+        "no-empty": "warn",
+        "sonarjs/cognitive-complexity": "off"
     }
 }

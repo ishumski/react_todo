@@ -7,12 +7,13 @@ const initialState = {
   status: ActionStatus.IDLE,
 };
 
-export default function task(state = initialState, action) {
+export default function tasks(state = initialState, action) {
   switch (action.type) {
     case types.GET_LIST_TASKS_REQUEST:
     case types.ADD_LIST_TASKS_REQUEST:
     case types.UPDATE_LIST_TASK_REQUEST:
-    case types.DELETE_LIST_TASK_REQUEST: {
+    case types.DELETE_LIST_TASK_REQUEST:
+    case types.DELETE_CHECKED_LIST_TASK_REQUEST: {
       return {
         ...state,
         status: ActionStatus.LOADING,
@@ -38,8 +39,8 @@ export default function task(state = initialState, action) {
     case types.ADD_LIST_TASKS_SUCCEES: {
       return {
         ...state,
-        tasks: [...state.tasks, action.payload],
         status: ActionStatus.SUCCEEDED,
+        tasks: [...state.tasks, action.payload],
       };
     }
 
@@ -65,10 +66,11 @@ export default function task(state = initialState, action) {
       };
     }
 
-    case types.REORDER_LIST_TASKS_SUCCEES: {
+    case types.REORDER_LIST_TASKS_SUCCESS: {
       const { from, to } = action.payload;
-      console.log(from, to);
+
       const delta = from < to ? -1 : 1;
+
       return {
         ...state,
         status: ActionStatus.SUCCEEDED,
@@ -77,13 +79,14 @@ export default function task(state = initialState, action) {
             return { ...task, order: to };
           }
 
-          if (delta) {
-
-          }
-          
-          if (task.order > from && task.order <= to) {
+          if (!delta) {
+            if (task.order > from && task.order <= to) {
+              return { ...task, order: task.order + delta };
+            }
+          } else if (task.order >= from && task.order < to) {
             return { ...task, order: task.order + delta };
           }
+
           return task;
         }),
       };

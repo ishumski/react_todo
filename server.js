@@ -21,17 +21,16 @@ server.get('/lists', (req, res) => {
 server.delete('/lists/:id', (req, res) => {
   try {
     const decodedToken = jwtDecode(req.headers.authorization);
+    
     const listId = parseInt(req.params.id, 10);
 
-    const lists = router.db
-      .get('lists')
-      .find({ id: listId })
-      .value();
+    const list = router.db.get('lists').find({ id: listId }).value();
 
     if (!list) {
       res.sendStatus(404);
     }
-    if (lists.id !== decodedToken.sub) {
+
+    if (list.userId !== decodedToken.sub) {
       res.sendStatus(401);
     }
     router.db.get('lists').remove({ id: listId }).write();
